@@ -1,0 +1,37 @@
+{% extends "ticketing/base_page.html" %}
+{% load static %}
+{% load admin_urls %}
+{% block title %}
+لیست سینماها
+{% endblock %}
+
+{% block toolbar_title %}
+لیست سینماها
+{% endblock %}
+
+
+{% block main_content %}
+<div class="row">
+    <div class="col py-3">
+        {% if cinema_list_template %}
+            <ul class="item-list">
+                {% for cinema in cinema_list_template %}
+                    <li>
+                    <a href="{% url "ticketing:cinema_detail" cinema_id=cinema.cinema_code %}">
+                        <i class="fas fa-film"></i>
+                        {{ cinema }}
+                        <small class="text-muted">
+                            {{ cinema.name }}
+                        </small>
+                    </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-danger">
+                در حال حاضر هیچ سالنی برای نمایش وجود ندارد
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
